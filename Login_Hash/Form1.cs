@@ -79,66 +79,47 @@ namespace Login_Hash
                 txtConfirmarSenha.Text = String.Empty;
                 txtEmail.Text = String.Empty;
 
-                MessageBox.Show("Obrigado por seu registro !");
-
-                if (String.IsNullOrWhiteSpace(smtpEmail) || String.IsNullOrWhiteSpace(smtpPassword) ||
-String.IsNullOrWhiteSpace(smtpAddress) || smtpPorta <= 0)
-                {
-                    MessageBox.Show("A configuração do Email não foi definida corretamente! \nNão é possível enviar emails!");
-                }
-                else
-                {
-                    EnviaMensagem(_email.ToString(), _nomeUsuario.ToString(), _senha.ToString());
-                }
+                MessageBox.Show("Obrigado por seu registro!");
             }
         }
 
         private void AdicionaUsuarioNoBD(string _nomeUsuario, string _senha, string _email)
         {
-            string ConnectString = Properties.Settings.Default.LoginsConnectionString;
-            SqlConnection cn = new SqlConnection(ConnectString);
-            if (cn.State == ConnectionState.Closed)
+            string ConnectString = "Data Source=SQLEXPRESS;Initial Catalog=Login.sdf.CJ3022498;User ID=aluno;Password=aluno;";
+            using (SqlConnection cn = new SqlConnection(ConnectString))
             {
-                cn.Open();
-            }
-            SqlCommand cmd;
-            string sql = "insert into Acessos "
-                           + "(usuario, senha, email) "
-                           + "values (@usuario, @senha, @email)";
-            try
-            {
-                cmd = new SqlCommand(sql, cn);
-                cmd.Parameters.AddWithValue("@usuario", _nomeUsuario);
-                cmd.Parameters.AddWithValue("@senha", _senha);
-                cmd.Parameters.AddWithValue("@email", _email);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Usuario incluído.");
-            }
-            catch (SqlException sqlexception)
-            {
-                MessageBox.Show(sqlexception.Message, "Arre Égua.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Arre Égua, a coisa falhou...", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                cn.Close();
+                try
+                {
+                    cn.Open();  // Abre a conexão
+
+                    string sql = "INSERT INTO Acessos (usuario, senha, email) VALUES (@usuario, @senha, @email)";
+                    using (SqlCommand cmd = new SqlCommand(sql, cn))
+                    {
+                        cmd.Parameters.AddWithValue("@usuario", _nomeUsuario);
+                        cmd.Parameters.AddWithValue("@senha", _senha);
+                        cmd.Parameters.AddWithValue("@email", _email);
+
+                        int result = cmd.ExecuteNonQuery();  // Executa a query
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Usuário incluído.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Falha ao inserir o usuário.");
+                        }
+                    }
+                }
+                catch (SqlException sqlexception)
+                {
+                    MessageBox.Show(sqlexception.Message, "Erro de SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Erro desconhecido", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
-
-        public void EnviaMensagem(string ParaEndereco, string ParaNome, string _senha)
-        {
-            var cliente = new SmtpClient(txtEnderecoSMTP.Text, (int)nupPortaSMTP.Value)
-            {
-                Credentials = new NetworkCredential(txtEmailUsuarioSMTP.Text, txtSenhaEmailSMTP.Text),
-                EnableSsl = true
-            };
-            cliente.Send(txtEmailUsuarioSMTP.Text, ParaEndereco, "Obrigado !", "Obrigado por seu registro ! \n Seu usuário/senha são: \n \nUsuário: "
-                     + ParaNome.ToString() + "\nSenha: " + _senha.ToString());
-        }
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -200,6 +181,11 @@ String.IsNullOrWhiteSpace(smtpAddress) || smtpPorta <= 0)
                 }
 
             }
+        }
+
+        private void btnLogin_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

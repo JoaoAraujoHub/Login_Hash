@@ -63,6 +63,12 @@
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.acessosDataGridView = new System.Windows.Forms.DataGridView();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.usuarioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.senhaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.acessosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this._Login_sdf_CJ3022498DataSet = new Login_Hash._Login_sdf_CJ3022498DataSet();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.txtSenhaEmailSMTP = new System.Windows.Forms.TextBox();
@@ -74,14 +80,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this._Login_sdf_CJ3022498DataSet = new Login_Hash._Login_sdf_CJ3022498DataSet();
-            this.acessosBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.acessosTableAdapter = new Login_Hash._Login_sdf_CJ3022498DataSetTableAdapters.AcessosTableAdapter();
             this.tableAdapterManager = new Login_Hash._Login_sdf_CJ3022498DataSetTableAdapters.TableAdapterManager();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.usuarioDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.senhaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -91,12 +91,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.acessosDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.acessosBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._Login_sdf_CJ3022498DataSet)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nupPortaSMTP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._Login_sdf_CJ3022498DataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.acessosBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -146,6 +146,7 @@
             this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click_1);
             // 
             // txtSenhaLogin
             // 
@@ -430,6 +431,40 @@
             this.acessosDataGridView.TabIndex = 0;
             this.acessosDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.acessosDataGridView_CellContentClick);
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            // 
+            // usuarioDataGridViewTextBoxColumn
+            // 
+            this.usuarioDataGridViewTextBoxColumn.DataPropertyName = "Usuario";
+            this.usuarioDataGridViewTextBoxColumn.HeaderText = "Usuario";
+            this.usuarioDataGridViewTextBoxColumn.Name = "usuarioDataGridViewTextBoxColumn";
+            // 
+            // senhaDataGridViewTextBoxColumn
+            // 
+            this.senhaDataGridViewTextBoxColumn.DataPropertyName = "Senha";
+            this.senhaDataGridViewTextBoxColumn.HeaderText = "Senha";
+            this.senhaDataGridViewTextBoxColumn.Name = "senhaDataGridViewTextBoxColumn";
+            // 
+            // emailDataGridViewTextBoxColumn
+            // 
+            this.emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
+            this.emailDataGridViewTextBoxColumn.HeaderText = "Email";
+            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            // 
+            // acessosBindingSource
+            // 
+            this.acessosBindingSource.DataMember = "Acessos";
+            this.acessosBindingSource.DataSource = this._Login_sdf_CJ3022498DataSet;
+            // 
+            // _Login_sdf_CJ3022498DataSet
+            // 
+            this._Login_sdf_CJ3022498DataSet.DataSetName = "_Login_sdf_CJ3022498DataSet";
+            this._Login_sdf_CJ3022498DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.pictureBox3);
@@ -523,16 +558,6 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Endereço SMTP:";
             // 
-            // _Login_sdf_CJ3022498DataSet
-            // 
-            this._Login_sdf_CJ3022498DataSet.DataSetName = "_Login_sdf_CJ3022498DataSet";
-            this._Login_sdf_CJ3022498DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // acessosBindingSource
-            // 
-            this.acessosBindingSource.DataMember = "Acessos";
-            this.acessosBindingSource.DataSource = this._Login_sdf_CJ3022498DataSet;
-            // 
             // acessosTableAdapter
             // 
             this.acessosTableAdapter.ClearBeforeFill = true;
@@ -542,30 +567,6 @@
             this.tableAdapterManager.AcessosTableAdapter = this.acessosTableAdapter;
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.UpdateOrder = Login_Hash._Login_sdf_CJ3022498DataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            // 
-            // usuarioDataGridViewTextBoxColumn
-            // 
-            this.usuarioDataGridViewTextBoxColumn.DataPropertyName = "Usuario";
-            this.usuarioDataGridViewTextBoxColumn.HeaderText = "Usuario";
-            this.usuarioDataGridViewTextBoxColumn.Name = "usuarioDataGridViewTextBoxColumn";
-            // 
-            // senhaDataGridViewTextBoxColumn
-            // 
-            this.senhaDataGridViewTextBoxColumn.DataPropertyName = "Senha";
-            this.senhaDataGridViewTextBoxColumn.HeaderText = "Senha";
-            this.senhaDataGridViewTextBoxColumn.Name = "senhaDataGridViewTextBoxColumn";
-            // 
-            // emailDataGridViewTextBoxColumn
-            // 
-            this.emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
-            this.emailDataGridViewTextBoxColumn.HeaderText = "Email";
-            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
             // 
             // Form1
             // 
@@ -589,13 +590,13 @@
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.acessosDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.acessosBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._Login_sdf_CJ3022498DataSet)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nupPortaSMTP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._Login_sdf_CJ3022498DataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.acessosBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
